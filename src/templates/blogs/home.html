@@ -1,5 +1,10 @@
 {% extends 'blogs/base.html' %}
 
 {% block content %}
-<h1>Home page</h1>
+<h1>Blog posts</h1>
+<ul>
+    {% for post in all_posts %}
+    <li>{{ post.caption }}</li>
+    {% endfor %}
+</ul>
 {% endblock content %}
