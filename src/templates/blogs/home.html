@@ -4,7 +4,10 @@
 <h1>Blog posts</h1>
 <ul>
     {% for post in all_posts %}
-    <li>{{ post.caption }}</li>
+    <div class="post-entry">
+        <h2><a href="{% url 'post_details' post.pk %}">{{ post.title }}</a></h2>
+        <p>{{ post.text }}</p>
+    </div>
     {% endfor %}
 </ul>
 {% endblock content %}
