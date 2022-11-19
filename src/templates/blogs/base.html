@@ -8,8 +8,13 @@
 </head>
 <body>
 <header>
+    <div class="nav-left">
     <a href="{% url 'post_list' %}">Home</a>
     <a href="{% url 'about' %}">About</a>
+    </div>
+    <div class="nav-right">
+        <a href="{% url 'post_create' %}">New post</a>
+    </div>
 </header>
 
 {% block content %}
