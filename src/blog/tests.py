@@ -5,6 +5,29 @@ from django.urls import reverse
 from .models import Post
 
 
+class SignupPageTest(TestCase):
+    username = 'testuser'
+    email = 'test@email.com'
+    password = 'secret'
+
+    def test_open_signup_page_by_url(self):
+        response = self.client.get('/accounts/signup/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_open_signup_page_by_name(self):
+        response = self.client.get(reverse('signup'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/signup.html')
+
+    def test_signup_form(self):
+        new_user = get_user_model().objects.create_user(
+            self.username, self.email
+        )
+        self.assertEqual(get_user_model().objects.all().count(), 1)
+        self.assertEqual(get_user_model().objects.all()[0].username, self.username)
+        self.assertEqual(get_user_model().objects.all()[0].email, self.email)
+
+
 class BlogListTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
@@ -25,6 +48,11 @@ class BlogListTest(TestCase):
         self.assertEqual(f'{self.post.title}', 'Test post')
         self.assertEqual(f'{self.post.author}', 'testuser')
         self.assertEqual(f'{self.post.text}', 'Test post text')
+
+    def test_open_post_list_by_url(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'blogs/home.html')
 
     def test_open_post_list(self):
         response = self.client.get(reverse('post_list'))
