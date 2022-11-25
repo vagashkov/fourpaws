@@ -1,0 +1,7 @@
+[flake8]
+exclude =
+    accounts/migrations,
+    blog/migrations,
+    __pycache__,
+    manage.py,
+    config/settings.py,

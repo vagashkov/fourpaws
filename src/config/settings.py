@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "crispy_forms",
-    
+
     "accounts",
     "blog"
 ]
@@ -137,3 +137,5 @@ LOGIN_REDIRECT_URL = "post_list"
 LOGOUT_REDIRECT_URL = "post_list"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
