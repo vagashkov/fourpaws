@@ -2,12 +2,28 @@
 
 {% block content %}
 <h1>Blog posts</h1>
-<ul>
     {% for post in all_posts %}
-    <div class="post-entry">
-        <h2><a href="{% url 'post_details' post.pk %}">{{ post.title }}</a></h2>
-        <p>{{ post.text }}</p>
+    <div class="card">
+        <div class="card-header">
+            <span class="font-wight-bold">{{ post.title }}</span>
+            <span class="text-muted">by {{ post.author }} | {{ post.date}}</span>
+        </div>
+        <div class="card-body">
+            {{ post.text }}
+            <a href="{% url 'post_edit' post.pk %}">Edit</a> | <a href="{% url 'post_delete' post.pk %}">Delete</a>
+        </div>
+        <div class="card-footer text-center text-muted">
+             {% for comment in post.comments.all %}
+            <p>
+                <span class="font-weight-bold">
+                    {{ comment.author }} &middot;
+                </span>
+                {{ comment.comment }}
+            </p>
+             {% endfor%}
+        </div>
     </div>
-    {% endfor %}
-</ul>
+<br>
+{% endfor %}
 {% endblock content %}
+
